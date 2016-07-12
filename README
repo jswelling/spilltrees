@@ -1,0 +1,28 @@
+This package provides spilltrees of arbitrary dimensionality.  They
+are very useful data structures for nearest neighbor finding- see
+"An Investigation of Practical Approximate Nearest Neighbor Algorithms" 
+by Liu, Moore, Gray and Yang for details.  By an appropriate choice
+of parameters the spilltree can be converted to a metric tree, which
+finds exact nearest neighbors (albeit more slowly).
+
+The standard installation procedure is just to un-tar the file
+(which you have presumably already done), cd into the newly
+created directory, and then do:
+
+  python setup.py build_ext --force
+  sudo python setup.py install
+
+The separate build_ext and install lines are necessary because of
+the mechanism which constructs modules of different dimensionalities 
+as needed.  See the Distutils guide to installing Python modules at
+
+ http://www.python.org/doc/2.5.2/inst/inst.html
+
+for additional options, including instructions for installing
+the software in a personal directory.
+
+By default, this package builds support for 2-dimensional spilltrees.
+To change the dimensionality, edit setup.cfg .  Instructions are
+included in the file.  It is also possible to change the configuration
+so that floating point numbers are represented as doubles rather than 
+by the default 4-byte floats.

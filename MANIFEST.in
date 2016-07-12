@@ -1,0 +1,2 @@
+include spilltree.h spilltree_tester.cc spilltree_tester.py Makefile
+include MANIFEST.in
