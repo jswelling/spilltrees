@@ -202,15 +202,11 @@ public:
 JWrapSpTree::JWrapSpTree(PyObject* input,
 			 const FloatType tau=0.3, const FloatType rho=0.7 ) 
 %{
-        if len(args)<1 or len(args)>3:
-            raise TypeError,"new_JWrapSpTree() takes 1 to 3 arguments"
         hookList= []
-        for a in args[0]:
+        for a in input:
             new_HookHolder= _HookHolder(a,a.getLoc())
             hookList.append(new_HookHolder)
-        if len(args)==1: args= tuple([hookList])
-        elif len(args)==2: args= (hookList,args[1])
-        else: args= (hookList,args[1],args[2])
+        input = hookList
 %}
 
 %feature("pythonappend") 
@@ -238,10 +234,7 @@ JWrapSpTree::~JWrapSpTree()
 %feature("pythonprepend") 
 JWrapSpTree::findApproxNearest(const _HookHolder& p) 
 %{
-        if len(args)!=2:
-            raise TypeError,"JWrapSpTree::findApproxNearest takes exactly 1 argument"
-        a1,a2= args;
-        args= (a1,_HookHolder(a2,a2.getLoc()))
+        p = _HookHolder(p, p.getLoc())
 %}
 
 %typemap(out) JWrapNeighborInfo {
@@ -260,10 +253,7 @@ JWrapSpTree::findApproxKNearest( JWrapNeighborInfo* neighbors_out,
 				      int* nFound_out_p,
 				      const int k, const _HookHolder& p ) 
 %{
-        if len(args)!=3:
-            raise TypeError,"JWrapSpTree.findApproxKNearest takes exactly 2 arguments"
-        a1,a2,a3= args;
-        args= (a1,a2,_HookHolder(a3,a3.getLoc()))
+        p= _HookHolder(p,p.getLoc())
 %}
 
 %typemap(in, numinputs=1) (JWrapNeighborInfo* neighbors_out, 
