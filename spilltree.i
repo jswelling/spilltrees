@@ -79,7 +79,7 @@ public:
 	       const FloatType tau=0.3, const FloatType rho=0.7);
   ~JWrapSpTree();
   int getNDim();
-  void dump(FILE* ofile);
+  // void dump(FILE* ofile);
   JWrapNeighborInfo findApproxNearest( const _HookHolder& p );
   void findApproxKNearest( JWrapNeighborInfo* neighbors_out, 
 			   int* nFound_out,
@@ -138,10 +138,12 @@ int JWrapSpTree::getNDim()
   return tree->getNDim();
 }
 
+/*
 void JWrapSpTree::dump(FILE* ofile)
 {
   tree->dump(ofile);
 }
+*/
 
 JWrapNeighborInfo 
 JWrapSpTree::findApproxNearest( const _HookHolder& p )
@@ -222,6 +224,7 @@ JWrapSpTree::~JWrapSpTree()
         self.hookList= None
 %}
 
+/*
 %typemap(in) (FILE* ofile) {
   if (PyFile_Check($input)) {
     $1= PyFile_AsFile($input);
@@ -230,6 +233,7 @@ JWrapSpTree::~JWrapSpTree()
     return NULL;
   }
 }
+*/
 
 %feature("pythonprepend") 
 JWrapSpTree::findApproxNearest(const _HookHolder& p) 
@@ -333,8 +337,8 @@ by Liu, Moore, Gray and Yang.  Set tau=0.0 for exact neighbors.
   ~JWrapSpTree();
   %feature(docstring,"Returns the dimensionality of the tree") getNDim;
   int getNDim();
-  %feature(docstring,"Writes a summary of the tree structure to the given file") dump;
-  void dump(FILE* ofile);
+  //%feature(docstring,"Writes a summary of the tree structure to the given file") dump;
+  //void dump(FILE* ofile);
   %feature("autodoc","findApproxNearest(ObjWithLoc) -> (neighborObjWithLoc, sepsqr)") findApproxNearest;
   %feature("docstring","sepsqr is the square of the separation distance") findApproxNearest;
   JWrapNeighborInfo findApproxNearest( const _HookHolder& p );

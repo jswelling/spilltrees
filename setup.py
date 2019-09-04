@@ -13,7 +13,7 @@ lines= f.readlines()
 f.close()
 for line in lines:
     words= line.strip().split()
-    for i in xrange(len(words)):
+    for i in range(len(words)):
         if words[i] == "-module":
             moduleName= words[i+1]
 
@@ -24,7 +24,7 @@ setup(name=moduleName,
                              define_macros=[('NDEBUG','1')],
                              #extra_compile_args=['-g','-O0'],
                              libraries=[],
-                             swig_opts=['-c++'],
+                             swig_opts=['-c++', '-py3'],
                              ),
                    ],
       py_modules=[moduleName],
